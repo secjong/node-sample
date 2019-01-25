@@ -1,0 +1,17 @@
+#Logs
+*.log*
+nohup.out
+npm-debug.log*
+
+#Secret Data
+#_*
+
+#Runtime Data
+dist/
+uploads/
+
+#Modules
+node_modules/
+
+#Allow
+!src/
