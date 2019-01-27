@@ -21,6 +21,10 @@ var tables = require('../controllers/tableController');
 // });
 
 router.get('/SJSQL/tables', tables.SELECTTableList);
+router.get('/SJSQL/tables/:tableName/desc', tables.SELECTTableDesc);
+router.get('/SJSQL/tables/:tableName/data', tables.SELECTTableData);
+router.post('/SJSQL/tables', tables.CREATETable);
+router.post('/SJSQL/tables/:tableName/:pk', tables.DELETETable);
 
 module.exports = router;
 

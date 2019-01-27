@@ -12,7 +12,7 @@ var config = {
     //데이터베이스 접속정보
     database : {
         host : 'localhost',
-        port : '3307',
+        port : '3306',
         user : 'root', //root 는 관리자
         password : '1234',
         database : 'mydb', //만들어져있어야함

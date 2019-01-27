@@ -18,7 +18,6 @@ module.exports.SELECTTableList = function (req, res) {
   //   });
   // }
   var p = tableModel.SELECTTableList();
-
   p
   .then(function (result) {
     res.json(result);
@@ -31,6 +30,80 @@ module.exports.SELECTTableList = function (req, res) {
   });
 
 };
+
+module.exports.SELECTTableDesc = function (req, res) {
+  var tableName = req.params.tableName;
+  var p = tableModel.SELECTTableDesc(tableName);
+  p
+  .then(function (result) {
+    res.json(result);
+  })
+  .catch(function (err) {
+    logHelper.error(err);
+  });
+
+};
+
+module.exports.SELECTTableData = function (req, res) {
+  var tableName = req.params.tableName;
+  var p = tableModel.SELECTTableData(tableName);
+  p
+  .then(function (result) {
+    res.json(result);
+  })
+  .catch(function (err) {
+    logHelper.error(err);
+  });
+
+};
+
+module.exports.CREATETable = function (req, res) {
+  var tableName = req.body.tableName;
+  var params = req.body.params;
+
+  logHelper.debug(tableName);
+  logHelper.debug(params);
+
+  var data = {
+    tableName : tableName,
+    params : params
+  };
+
+  var p = tableModel.CREATETable(data);
+  p
+  .then(function (result) {
+    res.json(result);
+  })
+  .catch(function (err) {
+    logHelper.error(err);
+  });
+
+};
+
+module.exports.DELETETable = function (req, res) {
+
+  var tableName = req.params.tableName;
+  var priKey = req.body.priKey;
+  var pk = req.params.pk;
+
+  var data = {
+    tableName : tableName,
+    priKey : priKey,
+    pk : pk
+  };
+
+  var p = tableModel.DELETETable(data);
+  p
+  .then(function (result) {
+    logHelper.trace(result);
+    res.json(result);
+  })
+  .catch(function (err) {
+    logHelper.error(err);
+  });
+
+};
+
 
 
 
