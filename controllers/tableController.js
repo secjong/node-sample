@@ -24,9 +24,7 @@ module.exports.SELECTTableList = function (req, res) {
   })
   .catch(function (err) {
     logHelper.error(err);
-    // res.sendResponse(500, {
-    //   "trace": error.message
-    // });
+    res.status(500).json(err);
   });
 
 };
@@ -40,6 +38,7 @@ module.exports.SELECTTableDesc = function (req, res) {
   })
   .catch(function (err) {
     logHelper.error(err);
+    res.status(500).json(err);
   });
 
 };
@@ -53,6 +52,7 @@ module.exports.SELECTTableData = function (req, res) {
   })
   .catch(function (err) {
     logHelper.error(err);
+    res.status(500).json(err);
   });
 
 };
@@ -76,6 +76,7 @@ module.exports.CREATETable = function (req, res) {
   })
   .catch(function (err) {
     logHelper.error(err);
+    res.status(500).json(err);
   });
 
 };
@@ -92,6 +93,8 @@ module.exports.DELETETable = function (req, res) {
     pk : pk
   };
 
+  logHelper.trace(data);
+
   var p = tableModel.DELETETable(data);
   p
   .then(function (result) {
@@ -100,9 +103,115 @@ module.exports.DELETETable = function (req, res) {
   })
   .catch(function (err) {
     logHelper.error(err);
+    res.status(500).json(err);
   });
 
 };
+
+module.exports.INSERTTableData = function (req, res) {
+
+  var tableName = req.params.tableName;
+  var params = req.body.params;
+  
+  var data = {
+    tableName : tableName,
+    params : params
+  };
+
+  var p = tableModel.INSERTTableData(data);
+  p
+  .then(function (result) {
+    logHelper.trace(result);
+    res.json(result);
+  })
+  .catch(function (err) {
+    logHelper.error(err);
+    res.status(500).json(err);
+  });
+
+};
+
+module.exports.UPDATETableData = function (req, res) {
+
+  var tableName = req.params.tableName;
+  var params = req.body.params;
+  var priKey = req.body.priKey;
+  var pk = req.params.pk;
+
+  var data = {
+    tableName : tableName,
+    priKey : priKey,
+    pk : pk,
+    params : params
+  };
+
+  logHelper.trace(data);
+
+  var p = tableModel.UPDATETableData(data);
+  p
+  .then(function (result) {
+    logHelper.trace(result);
+    res.json(result);
+  })
+  .catch(function (err) {
+    logHelper.error(err);
+    res.status(500).json(err);
+  });
+
+};
+
+module.exports.CUSTOMQuery = function (req, res) {
+
+  var data = {
+    query : req.body.query
+  };
+
+  var p = tableModel.CUSTOMQuery(data);
+  p
+  .then(function (result) {
+    logHelper.trace(result);
+    res.json(result);
+  })
+  .catch(function (err) {
+    logHelper.error(err);
+    res.status(500).json(err);
+  });
+
+};
+
+module.exports.TRUNCATETable = function (req, res) {
+  var tableName = req.params.tableName;
+  var p = tableModel.TRUNCATETable(tableName);
+  p
+  .then(function (result) {
+    logHelper.trace(result);
+    res.json(result);
+  })
+  .catch(function (err) {
+    logHelper.error(err);
+    res.status(500).json(err);
+  });
+
+};
+
+module.exports.DROPTable = function (req, res) {
+  
+  var tableName = req.params.tableName;
+
+  var p = tableModel.DROPTable(tableName);
+  p
+  .then(function (result) {
+    logHelper.trace(result);
+    res.json(result);
+  })
+  .catch(function (err) {
+    logHelper.error(err);
+    res.status(500).json(err);
+  });
+
+};
+
+
 
 
 

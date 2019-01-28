@@ -112,7 +112,7 @@ app.use(expressSession({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // WebHelper 설정
-// app.use(webHelper());
+app.use(webHelper());
 
 //라우터 모듈을 app 모듈에 등록
 app.use('/', router);

@@ -21,10 +21,16 @@ var tables = require('../controllers/tableController');
 // });
 
 router.get('/SJSQL/tables', tables.SELECTTableList);
+router.post('/SJSQL', tables.CUSTOMQuery);
 router.get('/SJSQL/tables/:tableName/desc', tables.SELECTTableDesc);
 router.get('/SJSQL/tables/:tableName/data', tables.SELECTTableData);
 router.post('/SJSQL/tables', tables.CREATETable);
 router.post('/SJSQL/tables/:tableName/:pk', tables.DELETETable);
+router.post('/SJSQL/tables/:tableName', tables.INSERTTableData);
+router.put('/SJSQL/tables/:tableName/:pk', tables.UPDATETableData);
+router.put('/SJSQL/tables/:tableName', tables.TRUNCATETable);
+router.delete('/SJSQL/tables/:tableName', tables.DROPTable);
+
 
 module.exports = router;
 
